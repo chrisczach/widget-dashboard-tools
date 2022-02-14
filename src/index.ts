@@ -18,7 +18,10 @@ function readLineAsync(question, defaultValue = '') {
     });
 }
 
-export const generateConfig = ({ cloudInstance, devServer, plugins }) => async ({ mode }) => {
+const defaultServer = 'http://127.0.0.1:3000'
+const defaultInstance = 'https://dev3.cloud.hdw.mx'
+
+export const generateConfig = ({ cloudInstance = defaultInstance, devServer = defaultServer, plugins = [] }) => async ({ mode }) => {
     const DB_ENV = 'DASHBOARD_PREVIEW_INSTANCE'
     const defaultInstance = process.env[DB_ENV] || cloudInstance
     const CLOUD_INSTANCE = mode === 'development' ? await readLineAsync('Please enter cloud portal instance for previews:\n', defaultInstance) as string : defaultInstance
