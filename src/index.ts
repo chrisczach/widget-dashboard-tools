@@ -51,7 +51,7 @@ export const generateConfig = ({ cloudInstance = defaultInstance, devServer = de
             host: '127.0.0.1',
             open: true,
             proxy: {
-                '^^((?!widget\.html|edit\.html|@vite\/client|src|node_modules|@id).)*$': {
+                '^^((?!widget\.html|edit\.html|@vite\/client|src|node_modules|@id|@react-refresh).)*$': {
                     target: CLOUD_INSTANCE,
                     secure: false,
                     changeOrigin: true,
