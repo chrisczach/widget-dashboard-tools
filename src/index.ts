@@ -32,7 +32,7 @@ export const generateConfig = ({ cloudInstance = defaultInstance, devServer = de
     }
 
     return {
-        plugins: [...plugins, viteSingleFile(), EnvironmentPlugin({ CLOUD_INSTANCE })],
+        plugins: [EnvironmentPlugin({ CLOUD_INSTANCE }), ...plugins, viteSingleFile()],
         build: {
             target: "esnext",
             assetsInlineLimit: 100000000,
