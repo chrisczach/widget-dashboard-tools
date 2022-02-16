@@ -31,6 +31,7 @@ const exitHandler = () => {
             clearInterval(handler)
         }
         handler = setTimeout(() => process.exit(0), 2000)
+        return 'no_used.js'
     }
 }
 
