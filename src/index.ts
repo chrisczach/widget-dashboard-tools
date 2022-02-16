@@ -21,6 +21,19 @@ function readLineAsync(question, defaultValue = '') {
 const defaultServer = 'http://127.0.0.1:3000'
 const defaultInstance = 'https://dev3.cloud.hdw.mx'
 
+
+const exitHandler = () => {
+    // TODO: Find out why vite won't exit
+    // eslint-disable-next-line functional/no-let
+    let handler: NodeJS.Timeout
+    return () => {
+        if (handler) {
+            clearInterval(handler)
+        }
+        handler = setTimeout(() => process.exit(0), 2000)
+    }
+}
+
 export const generateConfig = ({ cloudInstance = defaultInstance, devServer = defaultServer, plugins = [] }) => async ({ mode }) => {
     const DB_ENV = 'DASHBOARD_PREVIEW_INSTANCE'
     const defaultInstance = process.env[DB_ENV] || cloudInstance
@@ -43,7 +56,7 @@ export const generateConfig = ({ cloudInstance = defaultInstance, devServer = de
                 inlineDynamicImports: true,
                 input: ['widget.html', 'edit.html', 'index.html'],
                 output: {
-                    manualChunks: () => "not_used.js",
+                    manualChunks: exitHandler(),
                 },
             },
         },
